@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# small wrapper to load emacs with gdba and the right filenames
+
 from os import execlp
 from sys import argv
 
