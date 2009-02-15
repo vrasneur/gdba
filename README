@@ -1,0 +1,9 @@
+gdba wrapper for emacs
+----------------------
+
+To use it:
+* put `gdba' somewhere in your $PATH
+* put `load-gdba.el' in your `~/.emacs.d' directory
+
+To load a file in the debugger, simply use:
+gdba file [core-dump]
