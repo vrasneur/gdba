@@ -1,0 +1,8 @@
+#!/usr/bin/env python
+
+from os import execlp
+from sys import argv
+
+execlp('emacs', 'emacs',
+      '--eval', '(load-file (expand-file-name "~/.emacs.d/load-gdba.el"))',
+      '--eval', '(load-gdba "%s")' % ' '.join(argv[1:]))
