@@ -53,7 +53,7 @@
   (select-window (get-buffer-window gud-comint-buffer)))
 
 ;; gdba launcher
-(defun load-gdba (args)
-  (interactive)
-  (gdba (concat "gdb --annotate=3 " args))
+(defun load-gdba (filenames)
+  (interactive "sGDB filenames? ")
+  (gdba (concat "gdb --annotate=3 " filenames))
   (make-good-gdb-layout))
