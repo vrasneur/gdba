@@ -55,5 +55,5 @@
 ;; gdba launcher
 (defun load-gdba (filenames)
   (interactive "sGDB filenames? ")
-  (gdba (concat "gdb --annotate=3 " filenames))
+  (gdb (concat "gdb --annotate=3 " filenames))
   (make-good-gdb-layout))

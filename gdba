@@ -2,9 +2,17 @@
 
 # small wrapper to load emacs with gdba and the right filenames
 
-from os import execlp
-from sys import argv
+from os import execlp, getcwd
+from os.path import join as path_join, abspath, exists
+from sys import argv, exit
+
+args = []
+for arg in argv[1:]:
+    # always use absolute filenames
+    if not arg.startswith('-') and exists(arg):
+        arg = abspath(path_join(getcwd(), arg))
+    args.append(arg)
 
 execlp('emacs', 'emacs',
       '--eval', '(load-file (expand-file-name "~/.emacs.d/load-gdba.el"))',
-      '--eval', '(load-gdba "%s")' % ' '.join(argv[1:]))
+      '--eval', '(load-gdba "%s")' % ' '.join(args))
