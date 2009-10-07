@@ -1,5 +1,7 @@
 ;;; gdb/gud stuff
 
+(require 'gdb-ui)
+
 ;; no call to gdb-setup-windows!
 (setq gdb-many-windows nil)
 
@@ -13,7 +15,8 @@
 ;; +--------------+-----------+
 ;; | stack frames |  breakpts |
 ;; +--------------+-----------+
-(defun make-good-gdb-layout ()
+(defun gdba-make-custom-gdb-layout ()
+  (interactive)
   ;; all the buffers I want
   (gdb-display-assembler-buffer)
   (delete-other-windows)
@@ -52,8 +55,17 @@
   (gdb-set-window-buffer (gdb-breakpoints-buffer-name))
   (select-window (get-buffer-window gud-comint-buffer)))
 
+(defun gdba-delete-gdb-assembler-windows ()
+  (interactive)
+  (flet ((delete-gdb-window (gdb-key)
+               (let* ((buffer (gdb-get-buffer gdb-key))
+                      (window (and buffer (get-buffer-window buffer))))
+                 (when window (delete-window window)))))
+    (delete-gdb-window 'gdb-assembler-buffer)
+    (delete-gdb-window 'gdb-registers-buffer)))
+
 ;; gdba launcher
 (defun load-gdba (filenames)
   (interactive "sGDB filenames? ")
   (gdb (concat "gdb --annotate=3 " filenames))
-  (make-good-gdb-layout))
+  (gdba-make-custom-gdb-layout))
